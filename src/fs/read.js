@@ -1,10 +1,14 @@
 import fs from 'fs';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 const read = async () => {
-    const fileIsExist = fs.existsSync('files/fileToRead.txt');
+    const currentDir = dirname(fileURLToPath(import.meta.url));
+    const pathToFile = path.join(currentDir, 'files/fileToRead.txt');
+    const fileIsExist = fs.existsSync(pathToFile);
     if (!fileIsExist) throw new Error('FS operation failed');
 
-    fs.readFile('files/fileToRead.txt', 'utf8', (err, data) => {
+    fs.readFile(pathToFile, 'utf8', (err, data) => {
         if (err) throw err;
         console.log(data);
     })

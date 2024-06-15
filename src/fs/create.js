@@ -1,11 +1,15 @@
 import fs from 'fs';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 const create = async () => {
     try {
-        const exist = fs.existsSync('files/fresh.txt');
-        if (!exist) {
+        const currentDir = dirname(fileURLToPath(import.meta.url));
+        const pathToFile = path.join(currentDir, 'files/fresh.txt')
+        const fileIsExist = fs.existsSync(pathToFile);
+        if (!fileIsExist) {
             fs.writeFile(
-                'files/fresh.txt', 
+                pathToFile, 
                 'I am fresh and young', 
                 (err) => {
                     if (err) throw err;
