@@ -38,6 +38,7 @@ const performCalculations = async () => {
 
     const result = (await Promise.allSettled(promises)).map((x => x.value || x.reason));
     console.log(result);
+    process.exit(0);
 };
 
 await performCalculations();
